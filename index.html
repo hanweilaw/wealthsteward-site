@@ -169,21 +169,38 @@
   }
   .rings .lbl b { color: var(--sc-ink); font-weight: 500; }
 
-  /* ---- phone ---- */
+  /* ---- phone ----
+     The frame is 16:9 and a phone is 9:16, so a full-bleed crop puts the tree
+     under the copy. Instead the film takes the top 56svh (centre crop, tree and
+     roots whole) and the words sit on plain navy beneath it, no panel needed. */
   @media (max-width: 860px) {
+    .sc-world__seg > :is(video, img, canvas) { top: 0; bottom: auto; height: 50svh; object-position: 50% 50%; }
+    .sc-world::after { content: ""; position: absolute; left: 0; right: 0; top: 50svh; bottom: 0; background: var(--sc-canvas); z-index: 2; pointer-events: none; }
+    .sc-world::before { content: ""; position: absolute; left: 0; right: 0; top: calc(50svh - 6vh); height: 6vh; background: linear-gradient(180deg, transparent, var(--sc-canvas)); z-index: 3; pointer-events: none; }
+    .plate { display: none; }
     .blk, .blk--lead, .blk--trail, .blk--low, .blk--hero {
-      align-items: flex-end; justify-content: flex-start; padding: 0 var(--sc-gutter) 20vh;
+      align-items: flex-end; justify-content: flex-start; padding: 0 var(--sc-gutter) 1.25rem;
     }
-    .blk__in, .blk--trail .blk__in, .blk--low .blk__in, .blk--hero .blk__in { max-width: none; text-align: left; align-items: flex-start; }
+    .blk__in, .blk--trail .blk__in, .blk--low .blk__in, .blk--hero .blk__in {
+      max-width: none; text-align: left; align-items: flex-start; gap: var(--sc-3);
+      max-height: calc(50svh - 1.25rem - var(--sc-2)); overflow-y: auto; overscroll-behavior: contain; padding-right: 0;
+    }
     .blk--trail .ledger li { padding-left: 1.1em; padding-right: 0; }
     .blk--trail .ledger li::before { left: 0; right: auto; }
-    .blk h1 { font-size: var(--sc-t-2xl); }
-    .blk h2 { font-size: var(--sc-t-xl); }
-    .close { padding-bottom: 12vh; }
-    .close .blk__in { max-height: calc(100svh - 12vh - var(--sc-4)); }
-    .close img { width: 5rem; height: 5rem; }
-    .doors { justify-content: flex-start; }
-    .rings { width: 72px; height: 72px; bottom: var(--sc-4); }
+    .blk h1 { font-size: var(--sc-t-xl); }
+    .blk h2 { font-size: var(--sc-t-lg); }
+    .blk .lede { font-size: var(--sc-t-sm); max-width: none; }
+    .ledger { gap: 2px; }
+    .ledger li { font-size: var(--sc-t-xs); }
+    .role { font-size: var(--sc-t-xs); }
+    .close .blk__in { max-height: calc(50svh - 1.25rem - var(--sc-2)); gap: var(--sc-2); padding-right: 0; }
+    .close .who small { margin-top: 2px; }
+    .close img { width: 3.5rem; height: 3.5rem; }
+    .close .who { font-size: var(--sc-t-lg); }
+    .doors { justify-content: flex-start; gap: var(--sc-2); }
+    .door { font-size: var(--sc-t-sm); padding: 0.5em 0.8em; }
+    .small { font-size: 0.7rem; }
+    .rings { left: auto; right: var(--sc-gutter); width: 52px; height: 52px; bottom: auto; top: 4.6rem; }
     .rings .lbl { display: none; }
     .mark span { display: none; }
   }
@@ -304,7 +321,7 @@
       <div class="blk__in" data-sc-copy data-sc-window="0.94 1 0.45 0" data-plate="trail">
       <img src="assets/hanwei.webp" width="720" height="720" alt="Law Hanwei">
       <p class="who">Law Hanwei<small>The Wealth Steward · Singapore</small></p>
-      <p class="lede">I help Singapore families put their money, their cover and their authority in an order that still works on the day it is needed.</p>
+      <p class="lede">I help Singapore families put their money, their cover and their authority in an order that is meant to hold on the day it is needed.</p>
       <div class="doors">
         <a class="door door--solid" href="https://substack.com/@lawhanwei" rel="noopener">Read on Substack</a>
         <a class="door" href="https://www.linkedin.com/in/lawhw" rel="noopener">Connect on LinkedIn</a>
