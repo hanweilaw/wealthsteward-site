@@ -1,0 +1,476 @@
+<!doctype html>
+<!--
+  The Wealth Steward: one life, from acorn to oak.
+  Continuous-world grammar, worldflight mode. One fixed stage, six legs of one
+  drawn film, copy windows against the whole track, a growth-ring map the page
+  draws itself. Colours come from brand.css tokens; this file writes no hex.
+
+  DRAFT. Every line of copy clears /content-check and Hanwei's own read before
+  this goes anywhere public. The two links and the firm's registered name are
+  marked CONFIRM below.
+-->
+<html lang="en" data-design="flat">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Wealth Steward | Law Hanwei</title>
+<meta name="description" content="Law Hanwei helps Singapore families put their money, their cover and their authority in an order that is meant to hold on the day it is needed.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="176x176" href="assets/crest-small.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="canonical" href="https://wealthsteward.sg/">
+<meta name="theme-color" content="#0D2443">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Wealth Steward">
+<meta property="og:title" content="The Wealth Steward | Law Hanwei">
+<meta property="og:description" content="Financial and estate planning conversations for Singapore families. Every family starts with one acorn.">
+<meta property="og:url" content="https://wealthsteward.sg/">
+<meta property="og:image" content="https://wealthsteward.sg/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="An engraved oak in gold on navy, the crest of The Wealth Steward">
+<meta property="og:locale" content="en_SG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Wealth Steward | Law Hanwei">
+<meta name="twitter:description" content="Financial and estate planning conversations for Singapore families.">
+<meta name="twitter:image" content="https://wealthsteward.sg/assets/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="brand.css">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  /* The brand, mapped onto the engine's six roles and two faces. */
+  :root {
+    --sc-canvas:       var(--ws-navy);
+    --sc-surface:      var(--ws-navy-soft);
+    --sc-ink:          var(--ws-cream);
+    --sc-ink-soft:     var(--ws-on-navy-soft);
+    --sc-accent:       var(--ws-gold);
+    --sc-accent-ink:   var(--ws-navy-deep);
+    --sc-font-display: var(--ws-display);
+    --sc-font-text:    var(--ws-sans);
+    --sc-font-mono:    var(--ws-sans);
+    --sc-shadow-color: 215 68% 6%;
+    --sc-r-sm: 2px; --sc-r-md: 2px; --sc-r-lg: 2px;
+  }
+  html { scroll-behavior: auto; }
+  body { overflow-x: clip; }
+
+  /* ---- the mark, top left. Fixed chrome, nothing else up here. ---- */
+  .mark {
+    position: fixed; top: var(--sc-5); left: var(--sc-gutter); z-index: var(--sc-z-chrome);
+    display: flex; align-items: center; gap: var(--sc-3);
+    color: var(--sc-ink); text-decoration: none;
+    font-family: var(--sc-font-display); font-size: var(--sc-t-sm); letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .mark img { width: 34px; height: 34px; }
+
+  /* ---- copy blocks. Each block is a full-viewport flex frame (the engine owns
+     the block's transform, so the anchoring lives in flex, never in a translate).
+     Four anchors, never the same one twice running. ---- */
+  .blk { position: absolute; inset: 0; display: flex; padding: 0 var(--sc-gutter); }
+  .blk__in { display: flex; flex-direction: column; gap: var(--sc-4); max-width: 28rem; }
+  .blk--lead  { align-items: center; justify-content: flex-start; }
+  .blk--trail { align-items: center; justify-content: flex-end; }
+  .blk--trail .blk__in { text-align: right; align-items: flex-end; }
+  .blk--low   { align-items: flex-end; justify-content: center; padding-bottom: 9vh; }
+  .blk--low .blk__in { text-align: center; align-items: center; max-width: 40rem; }
+  .blk--hero  { align-items: flex-start; justify-content: flex-start; padding-top: 14vh; }
+  .blk--hero .blk__in { max-width: 32rem; }
+  .role { font-size: var(--sc-t-sm); letter-spacing: 0.04em; color: var(--sc-accent); margin: 0; }
+  .intro-link {
+    position: fixed; top: var(--sc-5); right: var(--sc-gutter); z-index: var(--sc-z-chrome);
+    font-size: var(--sc-t-sm); color: var(--sc-ink); text-decoration: none;
+    line-height: 1.6; padding: 0.35em 0.8em; border-radius: var(--sc-r-sm);
+    background: color-mix(in oklab, var(--ws-navy-deep) 82%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--sc-accent) 55%, transparent);
+  }
+  @media (hover: hover) and (pointer: fine) { .intro-link:hover { color: var(--sc-accent); } }
+  .intro-link.is-away { opacity: 0; pointer-events: none; transition: opacity var(--sc-d-base) var(--sc-ease-out); }
+  .blk h1, .blk h2 { font-family: var(--sc-font-display); font-weight: 400; line-height: 1.06; letter-spacing: -0.01em; text-wrap: balance; margin: 0; color: var(--sc-ink); }
+  .blk h1 { font-size: clamp(2.4rem, 1.6rem + 2.8vw, 4rem); font-variation-settings: "opsz" 120; }
+  .blk h2 { font-size: var(--sc-t-2xl); font-variation-settings: "opsz" 96; }
+  .blk .lede { font-size: var(--sc-t-base); line-height: 1.5; color: var(--sc-ink); max-width: 36ch; }
+  .blk .lede em { font-style: italic; }
+  /* the dense layer: the small ledger under each stage */
+  .ledger { list-style: none; margin: var(--sc-2) 0 0; padding: 0; display: grid; gap: var(--sc-1); max-width: 36ch; }
+  .ledger li { font-size: var(--sc-t-sm); line-height: 1.45; color: var(--sc-ink-soft); padding-left: 1.1em; position: relative; }
+  .blk--trail .ledger li { padding-left: 0; padding-right: 1.1em; }
+  .ledger li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 0.5em; height: 1px; background: var(--sc-accent); }
+  .blk--trail .ledger li::before { left: auto; right: 0; }
+  .ledger b { font-weight: 600; color: var(--sc-ink); }
+  .rule { width: var(--ws-rule-length); height: var(--ws-rule-weight); background: var(--sc-accent); }
+
+  /* The plates: one scrim per block, a SIBLING of the block, opacity copied
+     from the block each frame so the harness measures what the reader sees. */
+  .plate {
+    position: absolute; left: 0; top: 0; pointer-events: none; opacity: 0; z-index: 0;
+    border-radius: 28px;
+    background: color-mix(in oklab, var(--ws-navy-deep) 88%, transparent);
+    box-shadow: 0 0 56px 40px color-mix(in oklab, var(--ws-navy-deep) 88%, transparent);
+    will-change: transform, opacity;
+  }
+  /* ---- the close: the steward, two doors, the small print ---- */
+  /* The close never assumes it fits one viewport: it is a column that scrolls
+     inside the fixed layer when the viewport is short or the text is large. */
+  .close .blk__in { gap: var(--sc-5); max-width: 30rem; max-height: calc(100svh - 2 * var(--sc-5)); overflow-y: auto; overscroll-behavior: contain; padding: var(--sc-2); scrollbar-width: thin; }
+  @media (max-height: 720px) {
+    .close .blk__in { gap: var(--sc-4); }
+    .close img { width: 4.75rem; height: 4.75rem; }
+    .close .lede { font-size: var(--sc-t-sm); }
+  }
+  .close img { width: 7.5rem; height: 7.5rem; object-fit: cover; border-radius: 50%; box-shadow: 0 0 0 2px var(--sc-accent), var(--sc-e2); }
+  .close .who { font-family: var(--sc-font-display); font-size: var(--sc-t-xl); font-weight: 400; margin: 0; color: var(--sc-ink); }
+  .close .who small { display: block; font-family: var(--sc-font-text); font-size: var(--sc-t-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--sc-accent); margin-top: var(--sc-2); }
+  .doors { display: flex; gap: var(--sc-4); flex-wrap: wrap; justify-content: flex-end; }
+  .door {
+    display: inline-flex; align-items: center; gap: var(--sc-2);
+    font-family: var(--sc-font-text); font-weight: 500; font-size: var(--sc-t-base);
+    color: var(--sc-ink); text-decoration: none; padding: 0.7em 1.3em;
+    border: 1px solid var(--sc-accent); border-radius: var(--sc-r-sm);
+    transition: background var(--sc-d-fast) var(--sc-ease-out), color var(--sc-d-fast) var(--sc-ease-out), transform 120ms var(--sc-ease-out);
+  }
+  .door--solid { background: var(--sc-accent); color: var(--sc-accent-ink); }
+  @media (hover: hover) and (pointer: fine) {
+    .door:hover { background: var(--sc-ink); color: var(--sc-accent-ink); border-color: var(--sc-ink); }
+  }
+  .door:active { transform: translateY(1px); }
+  .small { font-size: var(--sc-t-xs); line-height: 1.5; color: var(--sc-ink-soft); max-width: 44ch; margin: 0; }
+
+  /* ---- the signature move: growth rings as the map ---- */
+  .rings {
+    position: fixed; left: var(--sc-gutter); bottom: var(--sc-5); z-index: var(--sc-z-chrome);
+    width: 132px; height: 132px; margin: 0; padding: 0;
+  }
+  .rings svg { width: 100%; height: 100%; overflow: visible; }
+  .rings svg { pointer-events: none; }
+  .rings .ring { fill: none; stroke: var(--sc-accent); stroke-width: 1.4; transition: stroke-width var(--sc-d-fast) var(--sc-ease-out); }
+  /* the real controls: one round button per ring, smallest on top so a click
+     between two rings goes to the nearer, larger one */
+  .rings__list { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+  .rings__btn {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: var(--d); height: var(--d); border-radius: 50%; border: 0; padding: 0;
+    background: transparent; cursor: pointer; color: inherit;
+    -webkit-appearance: none; appearance: none;
+  }
+  .rings__btn:focus-visible { outline: 2px solid var(--sc-ink); outline-offset: 2px; }
+  .rings__btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .rings .ring.is-current { stroke-width: 3; }
+  .rings .ring:focus-visible { outline: none; stroke: var(--sc-ink); }
+  @media (hover: hover) and (pointer: fine) { .rings.is-hover-0 .ring:nth-of-type(1), .rings.is-hover-1 .ring:nth-of-type(2), .rings.is-hover-2 .ring:nth-of-type(3), .rings.is-hover-3 .ring:nth-of-type(4), .rings.is-hover-4 .ring:nth-of-type(5), .rings.is-hover-5 .ring:nth-of-type(6) { stroke-width: 3; } }
+  .rings .heart { fill: var(--sc-accent); }
+  .rings .seal { opacity: 0; transition: opacity 600ms var(--sc-ease-out); }
+  .rings.is-sealed .seal { opacity: 1; }
+  .rings .lbl {
+    position: absolute; left: calc(100% + var(--sc-3)); bottom: 0.25rem; white-space: nowrap;
+    font-size: var(--sc-t-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-ink-soft);
+  }
+  .rings .lbl b { color: var(--sc-ink); font-weight: 500; }
+
+  /* ---- phone ---- */
+  @media (max-width: 860px) {
+    .blk, .blk--lead, .blk--trail, .blk--low, .blk--hero {
+      align-items: flex-end; justify-content: flex-start; padding: 0 var(--sc-gutter) 20vh;
+    }
+    .blk__in, .blk--trail .blk__in, .blk--low .blk__in, .blk--hero .blk__in { max-width: none; text-align: left; align-items: flex-start; }
+    .blk--trail .ledger li { padding-left: 1.1em; padding-right: 0; }
+    .blk--trail .ledger li::before { left: 0; right: auto; }
+    .blk h1 { font-size: var(--sc-t-2xl); }
+    .blk h2 { font-size: var(--sc-t-xl); }
+    .close { padding-bottom: 12vh; }
+    .close .blk__in { max-height: calc(100svh - 12vh - var(--sc-4)); }
+    .close img { width: 5rem; height: 5rem; }
+    .doors { justify-content: flex-start; }
+    .rings { width: 72px; height: 72px; bottom: var(--sc-4); }
+    .rings .lbl { display: none; }
+    .mark span { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sc-grain" aria-hidden="true"></div>
+
+<a class="mark" href="#top" aria-label="The Wealth Steward, home">
+  <img src="assets/crest-small.png" width="34" height="34" alt="">
+  <span>The Wealth Steward</span>
+</a>
+<a class="intro-link" href="#intro" id="introlink">About Hanwei</a>
+
+<main id="top" style="display: contents">
+<div data-sc-mode="worldflight" data-sc-seam="0.16" data-sc-lerp="0.12">
+
+  <div data-sc-world aria-hidden="true">
+    <div data-sc-segment data-sc-w="1.75" data-sc-waypoint="Seed">
+      <img class="sc-world__poster" src="assets/p1.webp" alt="" decoding="async">
+      <video data-sc-src="assets/leg1.mp4" data-sc-src-mobile="assets/leg1-m.mp4" muted playsinline></video>
+    </div>
+    <div data-sc-segment data-sc-w="1.75" data-sc-waypoint="Childhood">
+      <img class="sc-world__poster" src="assets/p2.webp" alt="" decoding="async">
+      <video data-sc-src="assets/leg2.mp4" data-sc-src-mobile="assets/leg2-m.mp4" muted playsinline></video>
+    </div>
+    <div data-sc-segment data-sc-w="1.75" data-sc-waypoint="Adulthood">
+      <img class="sc-world__poster" src="assets/p3.webp" alt="" decoding="async">
+      <video data-sc-src="assets/leg3.mp4" data-sc-src-mobile="assets/leg3-m.mp4" muted playsinline></video>
+    </div>
+    <div data-sc-segment data-sc-w="1.75" data-sc-waypoint="Parenthood">
+      <img class="sc-world__poster" src="assets/p4.webp" alt="" decoding="async">
+      <video data-sc-src="assets/leg4.mp4" data-sc-src-mobile="assets/leg4-m.mp4" muted playsinline></video>
+    </div>
+    <div data-sc-segment data-sc-w="2.625" data-sc-waypoint="Handover">
+      <img class="sc-world__poster" src="assets/p5.webp" alt="" decoding="async">
+      <video data-sc-src="assets/leg5.mp4" data-sc-src-mobile="assets/leg5-m.mp4" muted playsinline></video>
+    </div>
+  </div>
+
+  <div data-sc-world-copy>
+    <!-- plates are inserted here by the page script, one sibling per block -->
+
+    <!-- 1 · SEED -->
+    <section class="blk blk--hero">
+      <div class="blk__in" data-sc-copy data-sc-window="hero" data-stage="Seed" data-plate="hero">
+      <!-- CONFIRM (service/compliance wording, Hanwei): the role line -->
+      <p class="role">Financial and estate planning conversations for Singapore families.</p>
+      <h1>Every family starts with one acorn.</h1>
+      <!-- SIGN (Hanwei): the lived line below is a generic practice observation he chose 2026-10-26, not a specific case -->
+      <p class="lede">A child is born in Singapore. Nobody hands the parents a plan. I have sat with new parents who had the cot, the pram and the hospital bag ready, and nothing else. The soil is whatever they put in place in the first year, while nobody is looking.</p>
+      <ul class="ledger">
+        <li>Cover on the two people who earn.</li>
+        <li>Someone named to take the child.</li>
+        <li>Money set aside for the family's immediate needs.</li>
+      </ul>
+      </div>
+    </section>
+
+    <!-- 2 · CHILDHOOD -->
+    <section class="blk blk--trail">
+      <div class="blk__in" data-sc-copy data-sc-window="0.15 0.27" data-stage="Childhood" data-plate="trail">
+      <h2>The child never sees the roots.</h2>
+      <p class="lede">School, piano, the trip to see the grandparents. What pays for it is quiet. It was decided years earlier, at a kitchen table, by two people who hoped never to need it.</p>
+      <ul class="ledger">
+        <li><b>Care.</b> Who looks after the people.</li>
+        <li><b>Cash.</b> Money there when it is needed.</li>
+        <li><b>Control.</b> The right authority over the right asset.</li>
+        <li><b>Conflict.</b> A family designed not to fight.</li>
+      </ul>
+      </div>
+    </section>
+
+    <!-- 3 · ADULTHOOD -->
+    <section class="blk blk--lead">
+      <div class="blk__in" data-sc-copy data-sc-window="0.30 0.40" data-stage="Adulthood" data-plate="lead">
+      <h2>As they build a life of their own.</h2>
+      <p class="lede">First salary. First CPF statement. The same questions the parents once answered, asked again in their own name. The habit was planted long before the pay slip.</p>
+      <ul class="ledger">
+        <li>Own cover, before anyone depends on them.</li>
+        <li>A floor of savings before the first investment.</li>
+        <li>The first honest conversation about what the money is for.</li>
+      </ul>
+      </div>
+    </section>
+
+    <!-- 4 · PARENTHOOD -->
+    <section class="blk blk--trail">
+      <div class="blk__in" data-sc-copy data-sc-window="0.42 0.56" data-stage="Parenthood" data-plate="trail">
+      <h2>Then it is your turn to be the shade.</h2>
+      <p class="lede">A child of your own. The questions stop being academic. Who has the child tonight if you are both in hospital. What pays the mortgage in month two. Who can act when you cannot sign.</p>
+      <ul class="ledger">
+        <li>It is easy to postpone these questions.</li>
+        <li>Everything above this layer rests on it.</li>
+      </ul>
+      </div>
+    </section>
+
+    <!-- 5 · LEGACY (the authored quiet before the peak) -->
+    <section class="blk blk--low">
+      <div class="blk__in" data-sc-copy data-sc-window="0.58 0.71" data-stage="Legacy" data-plate="low">
+      <h2>Wealth that outlives the person who built it is built in layers.</h2>
+      <p class="lede">Not one document and not one product. Layers, each holding the one above it. I call the design the Stewardship Framework.</p>
+      </div>
+    </section>
+
+    <!-- 6 · HANDOVER (the peak) -->
+    <section class="blk blk--lead">
+      <div class="blk__in" data-sc-copy data-sc-window="0.84 0.93 0.25 0.3" data-stage="Handover" data-plate="lead">
+      <h2>The acorn falls. The roots are already there.</h2>
+      <p class="lede">The next generation does not start from bare soil. It starts from a plan that was already in place on the day they arrived. <em>Prudent financial planning pays off, most of all for the people who come after you.</em></p>
+      </div>
+    </section>
+
+    <!-- 7 · ARRIVAL -->
+    <section class="blk blk--trail close" id="intro">
+      <div class="blk__in" data-sc-copy data-sc-window="0.94 1 0.45 0" data-plate="trail">
+      <img src="assets/hanwei.webp" width="720" height="720" alt="Law Hanwei">
+      <p class="who">Law Hanwei<small>The Wealth Steward · Singapore</small></p>
+      <p class="lede">I help Singapore families put their money, their cover and their authority in an order that still works on the day it is needed.</p>
+      <div class="doors">
+        <a class="door door--solid" href="https://substack.com/@lawhanwei" rel="noopener">Read on Substack</a>
+        <a class="door" href="https://www.linkedin.com/in/lawhw" rel="noopener">Connect on LinkedIn</a>
+      </div>
+      <!-- CONFIRM (compliance, Hanwei): the firm name was removed on his instruction 2026-10-21; the exact disclosure wording is his to settle -->
+      <p class="small">Law Hanwei is an appointed representative in Singapore, listed on the MAS Register of Representatives. Nothing on this page is advice. A plan is built after a conversation, never before one.</p>
+      </div>
+    </section>
+  </div>
+
+  <div data-sc-spacer aria-hidden="true"></div>
+</div>
+</main>
+
+<!-- The growth rings. Drawn by this page, not the engine. -->
+<nav class="rings" aria-label="Stages of the life">
+  <svg viewBox="0 0 132 132" aria-hidden="true" focusable="false">
+    <circle class="heart" cx="66" cy="66" r="2.4"/>
+    <g id="ringset"></g>
+    <g class="seal" aria-hidden="true">
+      <circle cx="66" cy="66" r="64" fill="none" stroke="var(--ws-gold)" stroke-width="0.9"/>
+      <circle cx="66" cy="66" r="60.5" fill="none" stroke="var(--ws-gold)" stroke-width="2.4"/>
+      <circle cx="66" cy="66" r="56.5" fill="none" stroke="var(--ws-gold)" stroke-width="0.7"/>
+    </g>
+  </svg>
+  <ol class="rings__list" id="ringlist"></ol>
+  <p class="lbl" aria-live="polite"><b id="ringlbl">Seed</b></p>
+</nav>
+
+<script src="scrollcraft.js"></script>
+<script>
+(function () {
+  var root = document.querySelector('[data-sc-mode="worldflight"]');
+  var copyLayer = root.querySelector('[data-sc-world-copy]');
+  var blocks = Array.prototype.slice.call(copyLayer.querySelectorAll('[data-sc-copy]'));
+  var segs = Array.prototype.slice.call(root.querySelectorAll('[data-sc-segment]'));
+
+  // ---- one plate per block, as a sibling, so the contrast pass can see it
+  var plates = blocks.map(function (b) {
+    var p = document.createElement('div');
+    p.className = 'plate plate--' + (b.getAttribute('data-plate') || 'lead');
+    p.setAttribute('aria-hidden', 'true');
+    copyLayer.insertBefore(p, copyLayer.firstChild);
+    return p;
+  });
+  var PAD = 26;
+  (function tick() {
+    for (var i = 0; i < blocks.length; i++) {
+      var inner = blocks[i].querySelector('.blk__in') || blocks[i];
+      var r = inner.getBoundingClientRect();
+      var pl = plates[i];
+      pl.style.opacity = blocks[i].style.opacity || '0';
+      pl.style.transform = 'translate(' + (r.left - PAD) + 'px,' + (r.top - PAD) + 'px)';
+      var w = Math.round(r.width + 2 * PAD) + 'px', h = Math.round(r.height + 2 * PAD) + 'px';
+      if (pl.style.width !== w) pl.style.width = w;
+      if (pl.style.height !== h) pl.style.height = h;
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  ScrollCraft.mount(document.body);
+
+  // worldflight 7b: the spacer is sized once at mount; re-measure when the
+  // window and the fonts have settled.
+  function relayout() { dispatchEvent(new Event('resize')); }
+  addEventListener('load', relayout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
+
+  // ---- the growth rings: one ring per leg passed, each a button to that leg
+  var stageBlocks = blocks.filter(function (b) { return b.hasAttribute('data-stage'); });
+  var labels = stageBlocks.map(function (b) { return b.getAttribute('data-stage'); });
+  var weights = segs.map(function (s) { return parseFloat(s.getAttribute('data-sc-w')) || 1.3; });
+  var starts = []; weights.reduce(function (acc, w, i) { starts[i] = acc; return acc + w; }, 0);
+  var set = document.getElementById('ringset');
+  var lbl = document.getElementById('ringlbl');
+  var ringsEl = document.querySelector('.rings');
+  var NS = 'http://www.w3.org/2000/svg';
+  // Where a stage is READABLE, not where its clip begins: the middle of the
+  // plateau of the copy window that belongs to that leg, computed at click
+  // time so a resize or a late font keeps it right.
+  function windowOf(blk) {
+    var spec = (blk.getAttribute('data-sc-window') || '').trim();
+    var total = weights.reduce(function (a, b) { return a + b; }, 0);
+    if (spec === 'hero') return { from: 0, to: 0.62 * weights[0] / total, rIn: 0, rOut: 0.65 };
+    if (spec === 'finale') return { from: (starts[weights.length - 1] + 0.4 * weights[weights.length - 1]) / total, to: 1, rIn: 0.55, rOut: 0 };
+    var n = spec.split(/\s+/).map(parseFloat);
+    var q = { from: n[0] || 0, to: isNaN(n[1]) ? (n[0] || 0) + 0.18 : n[1], rIn: 0.3, rOut: 0.3 };
+    if (!isNaN(n[2])) q.rIn = n[2]; if (!isNaN(n[3])) q.rOut = n[3];
+    return q;
+  }
+  function readableY(blk) {
+    var w = windowOf(blk), span = w.to - w.from, total = weights.reduce(function (a, b) { return a + b; }, 0);
+    var open = w.from + span * w.rIn, close = w.to - span * w.rOut;   // the plateau
+    var frac = (open + close) / 2;
+    return Math.min(frac * total * innerHeight, document.documentElement.scrollHeight - innerHeight);
+  }
+  var list = document.getElementById('ringlist');
+  var rings = labels.map(function (name, i) {
+    var r = 9 + i * 9.4;
+    var c = document.createElementNS(NS, 'circle');
+    c.setAttribute('class', 'ring'); c.setAttribute('cx', 66); c.setAttribute('cy', 66); c.setAttribute('r', r);
+    c.setAttribute('transform', 'rotate(-90 66 66)');
+    var len = 2 * Math.PI * r;
+    c.setAttribute('stroke-dasharray', len); c.setAttribute('stroke-dashoffset', len);
+    c.style.transition = 'stroke-dashoffset 900ms var(--sc-ease-out), stroke-width 160ms var(--sc-ease-out)';
+    set.appendChild(c);
+    // the control: a real button, sized to the ring, stacked smallest on top
+    var li = document.createElement('li');
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'rings__btn'; btn.dataset.leg = String(i);
+    btn.style.setProperty('--d', (2 * r / 132 * 100) + '%'); btn.style.zIndex = String(20 - i);
+    btn.innerHTML = '<span>' + name + '</span>';
+    btn.setAttribute('aria-label', name);
+    btn.addEventListener('click', function () { scrollTo({ top: readableY(stageBlocks[i]), behavior: 'auto' }); });
+    btn.addEventListener('mouseenter', function () { ringsEl.classList.add('is-hover-' + i); });
+    btn.addEventListener('mouseleave', function () { ringsEl.classList.remove('is-hover-' + i); });
+    li.appendChild(btn); list.appendChild(li);
+    c.btn = btn;
+    return c;
+  });
+  var drawn = -1;
+  function reach(k) {
+    for (var i = 0; i <= k; i++) rings[i].setAttribute('stroke-dashoffset', '0');
+    rings.forEach(function (c, i) { c.classList.toggle('is-current', i === k); if (i === k) c.btn.setAttribute('aria-current', 'true'); else c.btn.removeAttribute('aria-current'); });
+    lbl.textContent = labels[k];
+    drawn = Math.max(drawn, k);
+  }
+  // the current stage is the last stage whose copy window has opened at this track position
+  var lastStage = -1;
+  (function watchStage() {
+    var total = weights.reduce(function (a, b) { return a + b; }, 0);
+    var t = scrollY / innerHeight / total;
+    var k = 0;
+    for (var i = 0; i < stageBlocks.length; i++) { var w = windowOf(stageBlocks[i]); if (t >= w.from + (w.to - w.from) * w.rIn * 0.5) k = i; }
+    if (k !== lastStage) { lastStage = k; reach(k); }
+    requestAnimationFrame(watchStage);
+  })();
+  document.querySelector('.mark').addEventListener('click', function (e) {
+    e.preventDefault(); scrollTo({ top: 0, behavior: 'auto' });
+  });
+  document.getElementById('introlink').addEventListener('click', function (e) {
+    e.preventDefault();
+    scrollTo({ top: document.documentElement.scrollHeight - innerHeight, behavior: 'auto' });
+    blocks[blocks.length - 1].querySelector('a').focus({ preventScroll: true });
+  });
+
+  // Keyboard: a link inside a copy block that is not open yet is a trap. Park
+  // the track where that block's window is open before the focus ring lands.
+  var total = weights.reduce(function (a, b) { return a + b; }, 0);
+  document.addEventListener('focusin', function (e) {
+    var blk = e.target.closest && e.target.closest('[data-sc-copy]');
+    if (!blk || parseFloat(blk.style.opacity || '0') >= 0.85) return;
+    var spec = (blk.getAttribute('data-sc-window') || '').trim(), frac;
+    if (spec === 'finale') frac = 1;
+    else if (spec === 'hero') frac = 0;
+    else { var n = spec.split(/\s+/).map(parseFloat); frac = (n[0] + (isNaN(n[1]) ? n[0] + 0.18 : n[1])) / 2; }
+    scrollTo({ top: Math.min(frac * total * innerHeight, document.documentElement.scrollHeight - innerHeight), behavior: 'auto' });
+  });
+  // the rings resolve into the crest's seal once the last leg's finale opens
+  (function watchSeal() {
+    var last = blocks[blocks.length - 1];
+    ringsEl.classList.toggle('is-sealed', parseFloat(last.style.opacity || '0') > 0.5);
+    document.getElementById('introlink').classList.toggle('is-away', parseFloat(last.style.opacity || '0') > 0.5);
+    requestAnimationFrame(watchSeal);
+  })();
+})();
+</script>
+</body>
+</html>

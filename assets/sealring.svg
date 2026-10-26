@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" fill="none" stroke="#C3964E" aria-hidden="true">
+  <g>
+    <circle cx="500" cy="500" r="498" stroke-width="1.6" opacity="1"/>
+    <circle cx="500" cy="500" r="470" stroke-width="5.0" opacity="1"/>
+    <circle cx="500" cy="500" r="438" stroke-width="1.2" opacity="1"/>
+    <circle cx="500" cy="500" r="352" stroke-width="1.4" opacity="1"/>
+    <path d="M500 2 v28" stroke-width="1.6" transform="rotate(0 500 500)"/>
+    <path d="M500 2 v28" stroke-width="1.6" transform="rotate(90 500 500)"/>
+    <path d="M500 2 v28" stroke-width="1.6" transform="rotate(180 500 500)"/>
+    <path d="M500 2 v28" stroke-width="1.6" transform="rotate(270 500 500)"/>
+  </g>
+</svg>

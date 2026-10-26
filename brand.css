@@ -1,0 +1,264 @@
+/* ===========================================================================
+   The Wealth Steward — brand.css
+   The ONE place colour, type and backdrop live for anything rendered in code.
+
+   Companion to `OneDrive/Desktop/03_Content creation/07_Brand Kit/` (which
+   holds the binaries: fonts, crest source, video stings, .prproj). This file
+   is the code layer. Brand Guide v1 is the written law; this is its build.
+
+   Rule: templates IMPORT this. They never re-declare a hex value. Before
+   adding a colour here, check it is not already named below under a different
+   role — the six FSR one-pagers each invented their own #fffdf7 and #f4ecdc,
+   which is exactly the drift this file exists to stop.
+
+   Usage in a local template (renders to PDF, reads relative paths fine):
+       <link rel="stylesheet" href="../../brand/brand.css">
+
+   Usage in a published Artifact (strict CSP — no relative fetches): paste the
+   :root block inline and swap each motif url() for the matching data-URI in
+   `motifs/_datauri/`.
+   ========================================================================= */
+
+:root {
+  /* --- Core palette · Brand Guide v1, sampled from the crest + One-Pager.
+         These are canonical. Do not eyedropper new values. ---------------- */
+  --ws-navy: #0D2443;          /* PRIMARY — backgrounds, structure, body on light */
+  --ws-navy-deep: #081832;     /* shadow / pressed / the lower strata          */
+  --ws-navy-soft: #1B3355;     /* panels on cream, raised bands on navy        */
+  --ws-gold: #C3964E;          /* ACCENT — rules, strokes, emphasis on navy    */
+  --ws-gold-light: #D8B37A;    /* highlight                                    */
+  --ws-gold-deep: #9B7433;     /* pressed                                      */
+  --ws-antique: #A67623;       /* crest rim / seal / foil look ONLY            */
+  --ws-green: #47704C;         /* Steward Green — growth, "maximise", accent   */
+  --ws-teal: #5EA3A6;          /* Stream Teal — flow motifs, links, accent     */
+  --ws-cream: #FBF6ED;         /* SURFACE — light grounds, cards, cover fields */
+  --ws-cream-crest: #F4EDDA;   /* the crest's own field                        */
+  --ws-cream-shadow: #EDE4D2;  /* card edge on cream                           */
+  --ws-ink: #2B2B2B;           /* long-form body on cream                      */
+
+  /* --- Derived neutrals. Previously invented ad-hoc in every template;
+         named here so they stop drifting. ------------------------------- */
+  --ws-card: #FFFDF7;          /* card face on a cream page                    */
+  --ws-rule: #E3D9C6;          /* hairline on cream                            */
+  --ws-ink-soft: #5A544A;      /* secondary copy on cream                      */
+  --ws-on-navy: var(--ws-cream);
+  --ws-on-navy-soft: #B9C4D4;  /* secondary copy on navy                       */
+  --ws-note-field: #F4ECDC;    /* the gold-rule steward note block             */
+
+  /* --- Semantic status. Separate from the accent: gold is never a status. - */
+  --ws-ok: #47704C;
+  --ws-warn: #A67623;
+  --ws-bad: #9B3B30;
+  --ws-na: #8B8578;
+  --ws-warn-deep: #8A6420;      /* "unassigned" group heads, low-score figures  */
+  --ws-bad-deep: #A2401F;       /* the one rust label, on cream                 */
+
+  /* --- Status tint fields + their rules, for chips and callout blocks ----- */
+  --ws-ok-field: #EAF1E7;   --ws-ok-rule: #C6D6C4;
+  --ws-warn-field: #F6EFDC; --ws-warn-rule: #E7D6AE;
+  --ws-bad-field: #F6E8E2;  --ws-bad-rule: #E0C9C2;
+  --ws-green-field: #F2F4EF;    /* cool tint behind a green-ruled teach box     */
+
+  /* --- Additional cream-side neutrals, named out of the templates --------- */
+  --ws-track: #ECE3D0;          /* progress rail on cream                       */
+  --ws-ink-faint: #C9BFA9;      /* smallest print on cream — captions only      */
+
+  /* --- Data series. Fixed so a chart means the same thing twice. --------- */
+  --ws-guaranteed: #3660A8;    /* the floor / guaranteed layer                 */
+  --ws-projected: #0E9AA0;     /* projected — moves with markets              */
+  --ws-bridge: #EFE3C8;        /* bridge years                                 */
+
+  /* --- Type ------------------------------------------------------------- */
+  --ws-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --ws-sans: "Inter", -apple-system, "Segoe UI", "Helvetica Neue", sans-serif;
+
+  /* --- The gold rule. His one universal device: in the backdrop system it
+         doubles as the GROUND LINE that the rootwork hangs beneath. ------ */
+  --ws-rule-weight: 2px;
+  --ws-rule-length: 116px;
+}
+
+/* ===========================================================================
+   THE DESIGNS
+   Named backdrops. Declare one on the root element and mark the element that
+   carries the field:
+
+       <html data-design="root">
+         <div class="band ws-ground"> … </div>
+
+   The design decides the motif; the element decides where it sits. Changing
+   design is one attribute. Registry, the value-line mapping and how to add a
+   new one: themes.md.
+
+   Opacities are per-design and were tuned against real renders, not
+   calculated — gold on cream reads about twice as strong as gold on navy,
+   and a hairline that looks right in the file disappears on the page. Do not
+   normalise them to one value.
+   ========================================================================= */
+
+.ws-ground {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.ws-ground > * { position: relative; z-index: 1; }
+
+.ws-ground::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* --- root · investment. The root ball beneath the crest's oak, hanging under
+       the gold rule, which becomes the ground line. The house default. ----- */
+[data-design="root"] .ws-ground::before {
+  /* Stretched to the element's height rather than scaled proportionally: the
+     bands it usually rides in run 20–35mm, and at natural ratio only the stem
+     tops would show. A full-page field should override this to `auto`. */
+  background: url("motifs/rootwork-gold.svg") top center / 118% 100% no-repeat;
+  opacity: 0.42;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.8) 62%, rgba(0,0,0,0.35) 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.8) 62%, rgba(0,0,0,0.35) 100%);
+}
+
+/* --- canopy · protection. The oak canopy with the owl on watch. The mirror
+       of root — hangs from above, and built from leaf mass rather than line
+       filigree so the two never read alike at thumbnail size. ------------- */
+[data-design="canopy"] .ws-ground::before {
+  background: url("motifs/canopy-gold.svg") top center / 118% 100% no-repeat;
+  opacity: 0.34;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.85) 66%, rgba(0,0,0,0.4) 100%);
+          mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,0.85) 66%, rgba(0,0,0,0.4) 100%);
+}
+
+/* --- stream · retirement. The crest's stream as a terraced contour field. - */
+[data-design="stream"] .ws-ground::before {
+  background: url("motifs/stream-teal.svg") center / 112% 100% no-repeat;
+  opacity: 0.55;
+  -webkit-mask-image: linear-gradient(102deg, #000 0%, rgba(0,0,0,0.4) 62%, transparent 98%);
+          mask-image: linear-gradient(102deg, #000 0%, rgba(0,0,0,0.4) 62%, transparent 98%);
+}
+
+/* --- seal · estate. The crest's double ring, oversized and cropped. ------ */
+[data-design="seal"] .ws-ground::before {
+  background: url("motifs/sealring-gold.svg") right -14% center / auto 320% no-repeat;
+  opacity: 0.34;
+}
+
+/* --- strata · the seven-layer framework. Estate material only: anywhere
+       else the layers mean nothing and the field is decoration. Set
+       `--ws-layer: 1…7` on the field to move the marker. ----------------- */
+[data-design="strata"] .ws-ground { --ws-layer: 0; }
+
+[data-design="strata"] .ws-ground::before {
+  background-image:
+    linear-gradient(to bottom,
+      transparent calc(var(--ws-layer) * 14.2857%),
+      var(--ws-gold) calc(var(--ws-layer) * 14.2857%),
+      var(--ws-gold) calc(var(--ws-layer) * 14.2857% + 2px),
+      transparent calc(var(--ws-layer) * 14.2857% + 2px)),
+    repeating-linear-gradient(to bottom,
+      rgba(195,150,78,0.16) 0 1px, transparent 1px 14.2857%);
+  background-repeat: no-repeat, repeat;
+  background-size: 42% 100%, 100% 100%;
+  background-position: right top, left top;
+}
+
+/* --- flat · named, so plain navy is a decision and not a default. -------- */
+[data-design="flat"] .ws-ground::before { background-image: none; }
+
+/* --- Cream ground. The one-pagers are cream, so a design has to work on
+       both. Gold on cream is roughly twice as loud — hence the drop. ------ */
+.ws-ground.ws-light { background: var(--ws-cream); color: var(--ws-ink); }
+[data-design="root"] .ws-ground.ws-light::before { opacity: 0.11; }
+[data-design="canopy"] .ws-ground.ws-light::before { opacity: 0.10; }
+[data-design="stream"] .ws-ground.ws-light::before { opacity: 0.30; }
+[data-design="seal"] .ws-ground.ws-light::before { opacity: 0.16; }
+
+/* ===========================================================================
+   PRIMITIVES
+   Extracted from the six FSR one-pagers, which had each grown its own copy.
+   ========================================================================= */
+
+.ws-band {
+  background: var(--ws-navy);
+  color: var(--ws-cream);
+  padding: 5mm 14mm 4mm;
+}
+
+.ws-eyebrow {
+  font: 600 8pt/1 var(--ws-sans);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ws-gold);
+}
+
+.ws-title {
+  font-family: var(--ws-display);
+  font-weight: 500;
+  font-size: 17.5pt;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+.ws-promise {
+  font-family: var(--ws-display);
+  font-style: italic;
+  font-size: 10pt;
+  color: var(--ws-gold);
+}
+
+/* the gold rule — the brand's one universal mark */
+.ws-rule {
+  width: var(--ws-rule-length);
+  height: var(--ws-rule-weight);
+  background: var(--ws-gold);
+  border: 0;
+}
+
+.ws-card {
+  background: var(--ws-card);
+  border: 1px solid var(--ws-rule);
+}
+
+.ws-figure {
+  font-family: var(--ws-display);
+  font-weight: 500;
+  color: var(--ws-navy);
+  font-variant-numeric: tabular-nums;
+}
+
+/* the steward note — his voice, always gold-ruled, always serif */
+.ws-note {
+  border-left: 3px solid var(--ws-gold);
+  background: var(--ws-note-field);
+  padding: 2.4mm 5mm;
+  font-family: var(--ws-display);
+}
+
+.ws-foot {
+  background: var(--ws-navy);
+  color: var(--ws-on-navy-soft);
+  font: 400 7.5pt/1.4 var(--ws-sans);
+}
+
+/* status chips — form as well as colour, so severity reads without hue */
+.ws-chip {
+  font: 600 6.8pt/1 var(--ws-sans);
+  letter-spacing: 0.04em;
+  border: 1px solid var(--ws-rule);
+  border-radius: 999px;
+  padding: 0.9mm 2.2mm;
+  color: var(--ws-navy);
+  background: var(--ws-cream);
+}
+.ws-chip.is-bad { color: var(--ws-bad); border-color: #E0C9C2; background: #F6E8E2; }
+.ws-chip.is-warn { color: var(--ws-warn); border-color: #E7D6AE; background: #F6EFDC; }
+.ws-chip.is-ok { color: var(--ws-ok); border-color: #C6D6C4; background: #EAF1E7; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
