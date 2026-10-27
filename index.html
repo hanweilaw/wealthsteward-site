@@ -382,6 +382,18 @@
     requestAnimationFrame(tick);
   })();
 
+  // Phone: the lower half is plain navy, so the copy windows run edge to edge
+  // with a short dissolve between stages; on desktop the film fills the pauses.
+  if (matchMedia('(max-width: 860px)').matches) {
+    var phoneWindows = { Seed: '0 0.15 0 0.1', Childhood: '0.14 0.31 0.08 0.08', Adulthood: '0.30 0.43 0.08 0.08',
+      Parenthood: '0.42 0.59 0.08 0.08', Legacy: '0.58 0.85 0.08 0.08', Handover: '0.84 0.945 0.08 0.1' };
+    blocks.forEach(function (b) {
+      var st = b.getAttribute('data-stage');
+      if (st && phoneWindows[st]) b.setAttribute('data-sc-window', phoneWindows[st]);
+      else if (b.getAttribute('data-sc-window') === '0.94 1 0.45 0') b.setAttribute('data-sc-window', '0.94 1 0.1 0');
+    });
+  }
+
   ScrollCraft.mount(document.body);
 
   // worldflight 7b: the spacer is sized once at mount; re-measure when the
